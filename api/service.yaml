@@ -1,0 +1,50 @@
+openapi: 3.0.0
+servers: []
+info:
+    description: Service
+    version: "1.0.0"
+    title: Test case for BRE
+    contact:
+        email: gk@rekunov.ru
+    license:
+        name: Apache 2.0
+        url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+
+paths:
+    /content:
+        post:
+            summary: add content
+            operationId: addContent
+            description: Adds an content to database
+            responses:
+                '201':
+                    description: content added
+                '400':
+                    description: 'invalid input, object invalid'
+                '409':
+                    description: an existing item already exists
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/Content'
+                description: Content to add
+components:
+    schemas:
+        Content:
+            type: object
+            required:
+                - id
+                - name
+                - body
+            properties:
+                id:
+                    type: string
+                    format: uuid
+                    example: d290f1ee-6c54-4b01-90e6-d701748f0851
+                name:
+                    type: string
+                    example: Widget Adapter
+                body:
+                    type: string
+                    example: {}
