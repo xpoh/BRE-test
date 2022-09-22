@@ -10,10 +10,20 @@
 package swagger
 
 import (
+	"encoding/json"
+	"log"
 	"net/http"
 )
 
 func AddContent(w http.ResponseWriter, r *http.Request) {
+	c := Content{}
+	err := json.NewDecoder(r.Body).Decode(&c)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+	log.Println(c.Body)
+
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
 }

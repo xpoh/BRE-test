@@ -1,0 +1,43 @@
+version: '3.5'
+
+## Development Environment with
+## - App Dev Container
+## - MariaDB Database Server
+services:
+  ## App Build Environment
+  ## Docs: /developer-guide/
+  service:
+    build: .
+    image: service
+    depends_on:
+      - postgres
+    security_opt:
+      - seccomp:unconfined
+      - apparmor:unconfined
+    ports:
+      - "8080:8080"   # Default app port (host:container)
+    shm_size: "2gb"
+
+  postgres:
+    image: postgres:latest
+    ports:
+      - "5432:5432" # database port (host:container)
+    environment:
+      POSTGRES_DB: db
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: user
+    volumes:
+      - "./script/sql:/docker-entrypoint-initdb.d"
+
+  redis:
+    image: redis:alpine3.16
+    restart: always
+    ports:
+      - '6379:6379'
+#    command: redis-server --save 20 1 --loglevel warning --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
+#    volumes:
+#      - cache:/data
+networks:
+  default:
+    name: net
+    driver: bridge
