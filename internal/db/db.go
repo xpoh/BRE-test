@@ -4,11 +4,11 @@ import (
 	"database/sql"
 	"fmt"
 	_ "github.com/lib/pq"
-	swagger "github.com/xpoh/BRE-test/cmd/go"
+	swagger "github.com/xpoh/BRE-test/internal/service"
 )
 
 const (
-	host     = "10.10.10.100"
+	host     = "localhost"
 	port     = 5432
 	user     = "user"
 	password = "user"

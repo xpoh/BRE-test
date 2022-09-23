@@ -1,0 +1,12 @@
+### Add content
+POST http://localhost:8080/add
+Content-Type: application/json
+
+{
+  "id": "d290f1ee-6c54-4b01-90e6-d701748f0851",
+  "name": "content",
+  "body": "{Hello}"
+}
+
+### Get content
+GET http://localhost:8080/get/d290f1ee-6c54-4b01-90e6-d701748f0851

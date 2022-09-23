@@ -3,7 +3,7 @@ package cache
 import (
 	"context"
 	"github.com/go-redis/redis/v8"
-	"github.com/xpoh/BRE-test/cmd/go"
+	"github.com/xpoh/BRE-test/internal/service"
 )
 
 type CacheSorage struct {
@@ -11,7 +11,7 @@ type CacheSorage struct {
 	rdb *redis.Client
 }
 
-func (c *CacheSorage) AddToStorage(content swagger.Content) error {
+func (c *CacheSorage) AddToStorage(content service.Content) error {
 	err := c.rdb.Set(c.ctx, content.Id, content.Body, 0).Err()
 	return err
 }

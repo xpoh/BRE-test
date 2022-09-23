@@ -19,15 +19,11 @@ import (
 	"net/http"
 )
 
-var App *service.Service
-
 func main() {
 	c := cache2.NewCacheSorage(context.Background())
 	d := db.NewDbStorage()
-	App = service.NewService(c, d)
+	service.App = service.NewService(c, d)
 	log.Printf("Server started")
-
 	router := sw.NewRouter()
-
 	log.Fatal(http.ListenAndServe(":8080", router))
 }

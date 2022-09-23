@@ -2,11 +2,12 @@ package service
 
 import (
 	"errors"
-	swagger "github.com/xpoh/BRE-test/cmd/go"
 )
 
+var App *Service
+
 type Storager interface {
-	AddToStorage(content swagger.Content) error
+	AddToStorage(content Content) error
 	ReadFromStorage(id string) (string, error)
 	RemoveFromStorage(id string) error
 }
@@ -23,7 +24,7 @@ func NewService(cacheStorage Storager, dbStorage Storager) *Service {
 	return s
 }
 
-func (s *Service) SaveContent(c swagger.Content) error {
+func (s *Service) SaveContent(c Content) error {
 	if _, ok := s.pipe[c.Id]; ok {
 		return errors.New("internal error")
 	}
@@ -34,7 +35,7 @@ func (s *Service) SaveContent(c swagger.Content) error {
 		delete(s.pipe, c.Id)
 		return nil
 	} else {
-		// FIX ANYTHING
+		return errors.New("error add content")
 	}
 
 	return nil
