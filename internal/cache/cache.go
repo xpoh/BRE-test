@@ -11,17 +11,17 @@ type CacheSorage struct {
 	rdb *redis.Client
 }
 
-func (c *CacheSorage) addToStorage(content swagger.Content) error {
+func (c *CacheSorage) AddToStorage(content swagger.Content) error {
 	err := c.rdb.Set(c.ctx, content.Id, content.Body, 0).Err()
 	return err
 }
 
-func (c *CacheSorage) readFromStorage(id string) (string, error) {
+func (c *CacheSorage) ReadFromStorage(id string) (string, error) {
 	val, err := c.rdb.Get(c.ctx, id).Result()
 	return val, err
 }
 
-func (c *CacheSorage) removeFromStorage(id string) error {
+func (c *CacheSorage) RemoveFromStorage(id string) error {
 	err := c.rdb.Del(c.ctx, id).Err()
 	return err
 }

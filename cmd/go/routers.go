@@ -58,7 +58,14 @@ var routes = Routes{
 	Route{
 		"AddContent",
 		strings.ToUpper("Post"),
-		"/content",
+		"/add",
 		AddContent,
+	},
+
+	Route{
+		"GetIdGet",
+		strings.ToUpper("Get"),
+		"/get/{id}",
+		GetIdGet,
 	},
 }

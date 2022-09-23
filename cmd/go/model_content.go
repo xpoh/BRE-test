@@ -10,9 +10,7 @@
 package swagger
 
 type Content struct {
-	Id string `json:"id"`
-
+	Id   string `json:"id"`
 	Name string `json:"name"`
-
 	Body string `json:"body"`
 }

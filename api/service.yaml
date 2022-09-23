@@ -11,7 +11,25 @@ info:
         url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
 
 paths:
-    /content:
+    /get/{id}:
+        get:
+            responses:
+                '200':
+                    description: content find
+                '404':
+                    description: content not find
+            summary: get content
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  description: Parameter description in CommonMark or HTML.
+                  schema:
+                    type: integer
+                    format: int64
+                    minimum: 1
+
+    /add:
         post:
             summary: add content
             operationId: addContent

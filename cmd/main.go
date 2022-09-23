@@ -10,12 +10,21 @@
 package main
 
 import (
+	"context"
 	sw "github.com/xpoh/BRE-test/cmd/go"
+	cache2 "github.com/xpoh/BRE-test/internal/cache"
+	"github.com/xpoh/BRE-test/internal/db"
+	"github.com/xpoh/BRE-test/internal/service"
 	"log"
 	"net/http"
 )
 
+var App *service.Service
+
 func main() {
+	c := cache2.NewCacheSorage(context.Background())
+	d := db.NewDbStorage()
+	App = service.NewService(c, d)
 	log.Printf("Server started")
 
 	router := sw.NewRouter()
